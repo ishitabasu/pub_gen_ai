@@ -1,11 +1,11 @@
 import subprocess
+import sys
 
 
 def test_ingest_command():
-
     result = subprocess.run(
         [
-            "python",
+            sys.executable,   # <-- Use the current Python interpreter
             "app.py",
             "ingest",
             "docs"
@@ -15,15 +15,13 @@ def test_ingest_command():
     )
 
     assert result.returncode == 0
-
-    assert "successfully" in result.stdout.lower()
+    assert "Documents indexed successfully!" in result.stdout
 
 
 def test_ask_command():
-
     result = subprocess.run(
         [
-            "python",
+            sys.executable,   # <-- Use the current Python interpreter
             "app.py",
             "ask",
             "refund policy"
@@ -33,5 +31,4 @@ def test_ask_command():
     )
 
     assert result.returncode == 0
-
     assert "answer" in result.stdout.lower()
